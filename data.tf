@@ -1,4 +1,5 @@
 data "aws_ami" "ami" {
+  owners = ["amazon"]
   name_regex = "al2023-ami-2023.1.20230912.0-kernel-6.1-x86_64"
 }
 
