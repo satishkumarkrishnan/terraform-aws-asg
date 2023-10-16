@@ -1,5 +1,5 @@
 variable "public_path" {
-  default  = "./terraform-aws-asg/key"
+  default  = "./terraform-aws-asg/asg/key"
 }
 variable "cluster_name" {
   description = "The name to use for all the cluster resources"
