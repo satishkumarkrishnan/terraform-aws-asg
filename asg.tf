@@ -1,6 +1,6 @@
 resource "aws_key_pair" "deployer" {
   key_name   = "ec2-key"
-  public_key = file(var.public_path)
+  public_key = file("${path.module}/key")
 }
 
 resource "aws_launch_template" "tokyo_launch_template" {
