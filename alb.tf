@@ -2,7 +2,7 @@
 # To create ALB
 resource "aws_lb" "test" {
   internal                   = false
-  name                       = "tokyo-alb"
+  name                       = "mumbai-alb"
   load_balancer_type         = "application"
   security_groups = [data.aws_security_group.fe_security_id.id, data.aws_security_group.be_security_id.id ]
   subnets      = [data.aws_subnet.fe_subnet.id, data.aws_subnet.be_subnet.id]
@@ -10,11 +10,11 @@ resource "aws_lb" "test" {
 }
 # Target Group Creation
 resource "aws_lb_target_group" "target-group" {
-  name        = "tokyo-tg"
+  name        = "mumbai-tg"
   port        = 80
   protocol    = "HTTP"
   target_type = "instance"
-  vpc_id      = data.aws_vpc.tokyo_vpc.id
+  vpc_id      = data.aws_vpc.mumbai_vpc.id
 
   health_check {
     enabled             = true
@@ -49,6 +49,6 @@ resource "aws_lb_listener" "alb-listener" {
 }
 
 resource "aws_autoscaling_attachment" "asg_attachment" {
- autoscaling_group_name = aws_autoscaling_group.tokyo_asg.name
+ autoscaling_group_name = aws_autoscaling_group.mumbai_asg.name
  lb_target_group_arn   = aws_lb_target_group.target-group.arn
  }
