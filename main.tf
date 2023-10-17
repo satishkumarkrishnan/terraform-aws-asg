@@ -12,7 +12,7 @@ resource "aws_launch_template" "tokyo_launch_template" {
   vpc_security_group_ids = [data.aws_security_group.fe_security_id.id]
 }
 
-resource "aws_autoscaling_group" "tokyo_asg" {
+/*resource "aws_autoscaling_group" "tokyo_asg" {
   desired_capacity       = var.desired_capacity
   max_size               = var.max_size
   min_size               = var.min_size
@@ -23,4 +23,4 @@ resource "aws_autoscaling_group" "tokyo_asg" {
       id      = aws_launch_template.tokyo_launch_template.id
       version = "$Latest"
     }
- }
+ }*/
