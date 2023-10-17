@@ -1,5 +1,5 @@
 output "asg_name" {
-  value = aws_autoscaling_group.mumbai_asg.name
+  value = aws_autoscaling_group.tokyo_asg.name
 }
 
 output "asg_alb_name" {

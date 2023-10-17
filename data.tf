@@ -6,35 +6,35 @@ data "aws_ami" "ami" {
 data "aws_security_group" "fe_security_id" {
   filter {
     name   = "tag:Name"
-    values = ["mumbai-sg-0"] # insert value here
+    values = ["tokyo-sg-0"] # insert value here
   }
 }
 
 data "aws_security_group" "be_security_id" {
   filter {
     name   = "tag:Name"
-    values = ["mumbai-sg-1"] # insert value here
+    values = ["tokyo-sg-1"] # insert value here
   }
 }
 
 data "aws_subnet" "fe_subnet" {
   filter {
     name   = "tag:Name"
-    values = ["mumbai-subnets-0"] # insert value here
+    values = ["tokyo-subnets-0"] # insert value here
   }
 }
 
 data "aws_subnet" "be_subnet" {
   filter {
     name   = "tag:Name"
-    values = ["mumbai-subnets-1"] # insert value here
+    values = ["tokyo-subnets-1"] # insert value here
   }
 }
 
-data "aws_vpc" "mumbai_vpc" {
+data "aws_vpc" "tokyo_vpc" {
   filter {
     name   = "tag:Name"
-    values = ["mumbai Virtual Private Cloud"] # insert value here
+    values = ["tokyo Virtual Private Cloud"] # insert value here
   }
 }
 
