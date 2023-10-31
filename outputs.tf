@@ -13,3 +13,7 @@ output "asg_alb_arn" {
 output "asg_alb_dns_name" {
   value = aws_lb.test.dns_name
 }
+
+output "asg_policy_arn" {
+  value = aws_autoscaling_policy.tokyo_asg_policy.arn
+}
