@@ -24,3 +24,12 @@ resource "aws_autoscaling_group" "tokyo_asg" {
       version = "$Latest"
     }
  }
+
+ resource "aws_autoscaling_policy" "tokyo_asg_policy" {
+  name                   = "tokyo-asg-policy"
+  scaling_adjustment     = 4
+  adjustment_type        = "ChangeInCapacity"
+  cooldown               = 300
+  autoscaling_group_name = aws_autoscaling_group.tokyo_asg.name
+}
+
