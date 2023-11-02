@@ -17,3 +17,7 @@ output "asg_alb_dns_name" {
 output "asg_policy_arn" {
   value = aws_autoscaling_policy.tokyo_asg_policy.arn
 }
+
+output "asg_alb_hosted_zone_id" {
+  value = aws_lb.test.zone_id
+}
