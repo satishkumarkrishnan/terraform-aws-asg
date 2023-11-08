@@ -4,7 +4,7 @@ resource "aws_lb" "test" {
   internal                   = false
   name                       = "tokyo-alb"
   load_balancer_type         = "application"
-  security_groups = [module.vpc.vpc_fe_sg.id, module.vpc.vpc_be_sg.id]
+  security_groups = [module.vpc.vpc_fe_sg, module.vpc.vpc_be_sg]
   #security_groups = [data.aws_security_group.fe_security_id.id, data.aws_security_group.be_security_id.id ]
   #subnets      = [data.aws_subnet.fe_subnet.id, data.aws_subnet.be_subnet.id]
   subnets      = [module.vpc.vpc_fe_subnet.id, module.vpc.vpc_be_subnet.id]
