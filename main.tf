@@ -37,7 +37,6 @@ resource "aws_launch_template" "tokyo_launch_template" {
 }
 
 resource "aws_autoscaling_group" "tokyo_asg" {
-  count                  = 2
   desired_capacity       = var.desired_capacity
   max_size               = var.max_size
   min_size               = var.min_size
