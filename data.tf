@@ -47,5 +47,5 @@ data "aws_instances" "tokyo_instances" {
     SomeTag = "tokyo-instance"
   }
 
-  instance_state_names = "running"
+  instance_state_names = ["running", "stopped"]
 }
