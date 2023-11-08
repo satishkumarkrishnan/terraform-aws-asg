@@ -19,7 +19,7 @@ resource "aws_key_pair" "deployer" {
 }
 
 resource "aws_launch_template" "tokyo_launch_template" {
-  count         = 2
+  #count         = 2
   name_prefix   = "tokyo_asg"
   image_id      = var.ami
   instance_type = var.instance_type
@@ -30,7 +30,8 @@ resource "aws_launch_template" "tokyo_launch_template" {
     resource_type = "instance"
 
     tags = {
-      Name = "tokyo_instance_test_${count.index}"
+      Name = "tokyo_instance_test"
+      #Name = "tokyo_instance_test_${count.index}"
       instance_state_names = "running"
     }
   }  
