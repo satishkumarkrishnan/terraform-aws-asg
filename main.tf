@@ -49,14 +49,14 @@ resource "aws_autoscaling_group" "tokyo_asg" {
       id      = aws_launch_template.tokyo_launch_template.id
       version = "$Latest"
     }
-    dynamic "tag" {
+    /*dynamic "tag" {
     for_each = data.aws_default_tags.tokyo_tags
     content {
       key                 = tag.key
       value               = tag.value
       propagate_at_launch = true
     }
-  }
+  }*/
  }
 
  resource "aws_autoscaling_policy" "tokyo_asg_policy" {
