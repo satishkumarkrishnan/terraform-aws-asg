@@ -23,5 +23,5 @@ output "asg_alb_hosted_zone_id" {
 }
 
 output "ec2_instance_ids" {
-    value = data.aws_instances.test.ids
+    value = data.aws_instances.tokyo_instances.id
 }
