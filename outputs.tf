@@ -24,6 +24,6 @@ output "asg_alb_hosted_zone_id" {
 
 
 output "ec2_InstanceId" {
-    value = aws_launch_template.tokyo_launch_template.tags.Name
+    value = aws_launch_template.tokyo_launch_template.tags
     description = "get ec2 instance value id"
 }
