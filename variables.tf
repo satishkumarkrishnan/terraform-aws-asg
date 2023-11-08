@@ -1,3 +1,8 @@
+variable "region" {
+  description = "AWS region"
+  default     = "ap-northeast-1"
+}
+
 variable "cluster_name" {
   description = "The name to use for all the cluster resources"
   type        = string
