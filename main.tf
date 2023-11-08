@@ -37,10 +37,11 @@ resource "aws_launch_template" "tokyo_launch_template" {
 }
 
 resource "aws_autoscaling_group" "tokyo_asg" {
+  count                  = 2
   desired_capacity       = var.desired_capacity
   max_size               = var.max_size
   min_size               = var.min_size
-  health_check_type    = "EC2"
+  health_check_type      = "EC2"
 
   vpc_zone_identifier    = [module.vpc.vpc_fe_subnet.id, module.vpc.vpc_be_subnet.id]
   
