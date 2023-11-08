@@ -33,3 +33,9 @@ resource "aws_autoscaling_group" "tokyo_asg" {
   autoscaling_group_name = aws_autoscaling_group.tokyo_asg.name
 }
 
+/*resource "aws_alb_target_group_attachment" "tokyo_tg_attachmentProdRegister" {
+    count            = length(module.GetInstanceId)
+    target_group_arn = var.TgroupArn
+    target_id        = module.GetInstanceId.InstanceId[count.index]
+    port             = var.TgPort 
+}*/

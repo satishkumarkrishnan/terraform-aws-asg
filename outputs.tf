@@ -22,6 +22,8 @@ output "asg_alb_hosted_zone_id" {
   value = aws_lb.test.zone_id
 }
 
-output "ec2_instance_ids" {
-    value = data.aws_instances.tokyo_instances.id
+
+output "ec2_InstanceId" {
+    value = data.aws_instances.tokyo_instances[*].id
+    description = "get value id"
 }
