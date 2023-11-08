@@ -13,3 +13,6 @@ data "aws_instances" "tokyo_instances" {
   }
   instance_state_names = ["running", "stopped"]
 }
+
+data "aws_default_tags" "tokyo_tags" {
+}

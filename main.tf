@@ -49,6 +49,14 @@ resource "aws_autoscaling_group" "tokyo_asg" {
       id      = aws_launch_template.tokyo_launch_template.id
       version = "$Latest"
     }
+    dynamic "tag" {
+    for_each = data.aws_default_tags.tokyo_tags
+    content {
+      key                 = tag.key
+      value               = tag.value
+      propagate_at_launch = true
+    }
+  }
  }
 
  resource "aws_autoscaling_policy" "tokyo_asg_policy" {
@@ -56,12 +64,5 @@ resource "aws_autoscaling_group" "tokyo_asg" {
   scaling_adjustment     = 4
   adjustment_type        = "ChangeInCapacity"
   cooldown               = 300
-  autoscaling_group_name = aws_autoscaling_group.tokyo_asg.name
+  autoscaling_group_name = aws_autoscaling_group.tokyo_asg.name  
 }
-
-/*resource "aws_alb_target_group_attachment" "tokyo_tg_attachmentProdRegister" {
-    count            = length(module.GetInstanceId)
-    target_group_arn = var.TgroupArn
-    target_id        = module.GetInstanceId.InstanceId[count.index]
-    port             = var.TgPort 
-}*/
