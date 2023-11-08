@@ -7,32 +7,28 @@ data "aws_security_group" "fe_security_id" {
   filter {
     name   = "tag:Name"
     values = ["tokyo-sg-0"] # insert value here
-  }
-  depends_on = [data.aws_vpc.tokyo_vpc]
+  }  
 }
 
 data "aws_security_group" "be_security_id" {
   filter {
     name   = "tag:Name"
     values = ["tokyo-sg-1"] # insert value here
-  }
-  depends_on = [data.aws_vpc.tokyo_vpc]
+  }  
 }
 
 data "aws_subnet" "fe_subnet" {
   filter {
     name   = "tag:Name"
     values = ["tokyo-subnets-0"] # insert value here
-  }
-  depends_on = [data.aws_vpc.tokyo_vpc]
+  }  
 }
 
 data "aws_subnet" "be_subnet" {
   filter {
     name   = "tag:Name"
     values = ["tokyo-subnets-1"] # insert value here
-  }
-  depends_on = [data.aws_vpc.tokyo_vpc]
+  }  
 }
 
 data "aws_vpc" "tokyo_vpc" {
@@ -50,6 +46,5 @@ data "aws_instances" "tokyo_instances" {
   instance_tags = {
     SomeTag = "tokyo-instance"
   }
-
   instance_state_names = ["running", "stopped"]
 }
