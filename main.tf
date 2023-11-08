@@ -30,10 +30,9 @@ resource "aws_launch_template" "tokyo_launch_template" {
 
     tags = {
       Name = "tokyo_instance_test"
+      instance_state_names = ["running", "stopped"]
     }
-  }
-
-  
+  }  
 }
 
 resource "aws_autoscaling_group" "tokyo_asg" {
