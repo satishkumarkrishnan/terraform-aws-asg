@@ -24,6 +24,6 @@ output "asg_alb_hosted_zone_id" {
 
 
 output "ec2_InstanceId" {
-    value = data.aws_instances.tokyo_instances[*].id
-    description = "get value id"
+    value = module.vpc.instance[0].id
+    description = "get ec2 instance value id"
 }
