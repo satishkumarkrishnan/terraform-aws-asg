@@ -8,6 +8,7 @@ data "aws_security_group" "fe_security_id" {
     name   = "tag:Name"
     values = ["tokyo-sg-0"] # insert value here
   }
+  depends_on = [data.aws_vpc.tokyo_vpc]
 }
 
 data "aws_security_group" "be_security_id" {
@@ -15,6 +16,7 @@ data "aws_security_group" "be_security_id" {
     name   = "tag:Name"
     values = ["tokyo-sg-1"] # insert value here
   }
+  depends_on = [data.aws_vpc.tokyo_vpc]
 }
 
 data "aws_subnet" "fe_subnet" {
@@ -22,6 +24,7 @@ data "aws_subnet" "fe_subnet" {
     name   = "tag:Name"
     values = ["tokyo-subnets-0"] # insert value here
   }
+  depends_on = [data.aws_vpc.tokyo_vpc]
 }
 
 data "aws_subnet" "be_subnet" {
@@ -29,6 +32,7 @@ data "aws_subnet" "be_subnet" {
     name   = "tag:Name"
     values = ["tokyo-subnets-1"] # insert value here
   }
+  depends_on = [data.aws_vpc.tokyo_vpc]
 }
 
 data "aws_vpc" "tokyo_vpc" {
