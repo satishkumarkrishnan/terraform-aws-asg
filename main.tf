@@ -25,6 +25,15 @@ resource "aws_launch_template" "tokyo_launch_template" {
   user_data     = filebase64("${path.module}/user_data.sh")
   key_name      = "ec2-key"
   vpc_security_group_ids = [module.vpc.vpc_fe_sg]  
+  tag_specifications {
+    resource_type = "instance"
+
+    tags = {
+      Name = "tokyo_instance_test"
+    }
+  }
+
+  
 }
 
 resource "aws_autoscaling_group" "tokyo_asg" {
@@ -34,6 +43,7 @@ resource "aws_autoscaling_group" "tokyo_asg" {
   health_check_type    = "EC2"
 
   vpc_zone_identifier    = [module.vpc.vpc_fe_subnet.id, module.vpc.vpc_be_subnet.id]
+  
     launch_template {
       id      = aws_launch_template.tokyo_launch_template.id
       version = "$Latest"
