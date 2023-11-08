@@ -24,8 +24,7 @@ resource "aws_launch_template" "tokyo_launch_template" {
   instance_type = var.instance_type
   user_data     = filebase64("${path.module}/user_data.sh")
   key_name      = "ec2-key"
-  vpc_security_group_ids = [module.vpc.vpc_fe_subnet.id]
-  depends_on = [module.vpc]
+  vpc_security_group_ids = [module.vpc.vpc_fe_sg.id]  
 }
 
 resource "aws_autoscaling_group" "tokyo_asg" {
