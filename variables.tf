@@ -14,7 +14,7 @@ variable "instance_type" {
   description = "The type of EC2 Instances to run (e.g. t2.micro)"
   type        = string
   default     = "t2.micro"
-
+  
   validation {
     condition     = contains(["t2.micro", "t3.micro"], var.instance_type)
     error_message = "Only free tier is allowed: t2.micro | t3.micro."

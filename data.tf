@@ -41,3 +41,11 @@ data "aws_vpc" "tokyo_vpc" {
 data "aws_availability_zones" "available" {
   state = "available"
 }
+
+data "aws_instances" "tokyo_instnaces" {
+  instance_tags = {
+    SomeTag = "tokyo-instance"
+  }
+
+  instance_state_names = ["running", "stopped"]
+}
