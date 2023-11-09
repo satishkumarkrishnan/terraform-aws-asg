@@ -23,10 +23,10 @@ resource "aws_launch_template" "tokyo_launch_template" {
   name_prefix   = "tokyo_asg"
   image_id      = var.ami
   instance_type = var.instance_type
-  #user_data     = filebase64("${path.module}/user_data.sh")
+  user_data     = filebase64("${path.module}/user_data.sh")
   key_name      = "ec2-key"
   vpc_security_group_ids = [module.vpc.vpc_fe_sg]  
-  user_data= <<-EOF # creating user Data  
+  #user_data= <<-EOF # creating user Data  
 /*#!/bin/bash  
 i=1
 for INSTANCE in $(aws autoscaling describe-auto-scaling-instances --query AutoScalingInstances[].InstanceId --output text)
