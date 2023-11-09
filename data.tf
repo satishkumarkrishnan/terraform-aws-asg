@@ -18,5 +18,5 @@ data "aws_instance" "tokyo_test"{
     name = "instance-state-name"
     values = ["running"]
   } 
-  depends_on = [ module.vpc]
+  depends_on = [module.vpc]
 }
