@@ -23,17 +23,9 @@ resource "aws_launch_configuration" "tokyo_launch_config" {
   name_prefix   = "tokyo_asg"
   image_id      = var.ami
   instance_type = var.instance_type
-  #user_data     = filebase64("${path.module}/user_data.sh")
+  user_data     = filebase64("${path.module}/user_data.sh")
   key_name      = "ec2-key"
   security_groups = [module.vpc.vpc_fe_sg]  
-  user_data= <<-EOF # creating user Data  
-#!/bin/bash
-sudo su -
-yum update -y
-yum install httpd - y
-service httpd start
-yum install java -y
-  EOF
 }
 
 resource "aws_autoscaling_group" "tokyo_asg" {
