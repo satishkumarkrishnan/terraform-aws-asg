@@ -26,6 +26,7 @@ resource "aws_launch_configuration" "tokyo_launch_config" {
   user_data     = filebase64("${path.module}/user_data.sh")
   key_name      = "ec2-key"
   security_groups = [module.vpc.vpc_fe_sg]  
+  depends_on = [aws_autoscaling_group.tokyo_asg.aws_autoscaling_group.tokyo_asg]
 }
 
 resource "aws_autoscaling_group" "tokyo_asg" {
@@ -35,7 +36,7 @@ resource "aws_autoscaling_group" "tokyo_asg" {
   health_check_type      = "EC2"
   vpc_zone_identifier    = [module.vpc.vpc_fe_subnet.id, module.vpc.vpc_be_subnet.id]
   launch_configuration   = aws_launch_configuration.tokyo_launch_config.name
-    
+      
     dynamic "tag" {
     for_each = var.extra_tags
     content {
