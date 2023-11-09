@@ -17,8 +17,5 @@ data "aws_instance" "tokyo_test"{
   filter {
     name = "instance-state-name"
     values = ["running"]
-  }
- 
-  depends_on = [ module.asg]
- 
+  }  
 }
