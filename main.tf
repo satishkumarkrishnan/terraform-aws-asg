@@ -32,10 +32,8 @@ resource "aws_launch_template" "tokyo_launch_template" {
   NEW_NAME=${CURRENT_NAME}-${ID}
   aws ec2 create-tags --resources ${ID} --tags Key=Name,Value=${NEW_NAME}
   EOF*/
- 
-  tag_specifications {
-    resource_type = "instance"
-    
+   tag_specifications {
+    resource_type = "instance"   
 
     tags = {
       #Name = ${NEW_NAME}
