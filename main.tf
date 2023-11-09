@@ -26,7 +26,6 @@ resource "aws_launch_configuration" "tokyo_launch_config" {
   user_data     = filebase64("${path.module}/user_data.sh")
   key_name      = "ec2-key"
   security_groups = [module.vpc.vpc_fe_sg]  
-  depends_on = [aws_autoscaling_group.tokyo_asg.aws_autoscaling_group.tokyo_asg]
 }
 
 resource "aws_autoscaling_group" "tokyo_asg" {
