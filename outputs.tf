@@ -22,11 +22,6 @@ output "asg_alb_hosted_zone_id" {
   value = aws_lb.test.zone_id
 }
 
-output "asg_kms_key_arn" {
-  value = aws_kms_
-}
-
-
 output "instance_id" {
   value = data.aws_instance.tokyo_test.id
   }
