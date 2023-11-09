@@ -7,7 +7,7 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
-data "aws_instances" "tokyo_instances" {
+/*data "aws_instances" "tokyo_instances" {
   instance_tags = {
     SomeTag = "tokyo-instance"
   }
@@ -15,4 +15,4 @@ data "aws_instances" "tokyo_instances" {
 }
 
 data "aws_default_tags" "tokyo_tags" {
-}
+}*/
