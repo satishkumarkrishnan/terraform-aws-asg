@@ -57,7 +57,8 @@ resource "aws_autoscaling_group" "tokyo_asg" {
   vpc_zone_identifier    = [module.vpc.vpc_fe_subnet.id, module.vpc.vpc_be_subnet.id]
    
     launch_template {
-      id      = aws_launch_template.tokyo_launch_template.id
+      #id      = aws_launch_template.tokyo_launch_template.id
+      id      = aws_launch_configuration.tokyo_launch_config.id
       version = "$Latest"
     }
     /*dynamic "tag" {

@@ -21,9 +21,3 @@ output "asg_policy_arn" {
 output "asg_alb_hosted_zone_id" {
   value = aws_lb.test.zone_id
 }
-
-
-output "ec2_InstanceId" {
-    value = aws_launch_template.tokyo_launch_template.tags
-    description = "get ec2 instance value id"
-}
