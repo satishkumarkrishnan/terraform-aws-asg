@@ -27,12 +27,12 @@ resource "aws_launch_configuration" "tokyo_launch_config" {
   key_name      = "ec2-key"
   security_groups = [module.vpc.vpc_fe_sg]  
   user_data= <<-EOF # creating user Data  
-#!/bin/bash  
-i=1 -y
-for INSTANCE in $(aws autoscaling describe-auto-scaling-instances --query AutoScalingInstances[].InstanceId --output text) -y
-aws ec2 create-tags --resources $INSTANCE --tags Key=Name,Value="tokyo_instance"$i -y
-i=$((i+1)) -y
-done -y
+#!/bin/bash
+sudo su -
+yum update -y
+yum install httpd - y
+service httpd start
+yum install java -y
   EOF
 }
 
