@@ -7,12 +7,18 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
-/*data "aws_instances" "tokyo_instances" {
-  instance_tags = {
-    SomeTag = "tokyo-instance"
+data "aws_instance" "tokyo_test"{
+ 
+  filter{
+    name = "availability-zone"
+    values = ["ap-northeast-1a"]
   }
-  instance_state_names = ["running", "stopped"]
+ 
+  filter {
+    name = "instance-state-name"
+    values = ["running"]
+  }
+ 
+  depends_on = [ module.asg]
+ 
 }
-
-data "aws_default_tags" "tokyo_tags" {
-}*/
