@@ -23,19 +23,16 @@ resource "aws_launch_configuration" "tokyo_launch_config" {
   name_prefix   = "tokyo_asg"
   image_id      = var.ami
   instance_type = var.instance_type
-  user_data     = filebase64("${path.module}/user_data.sh")
+  #user_data     = filebase64("${path.module}/user_data.sh")
   key_name      = "ec2-key"
   security_groups = [module.vpc.vpc_fe_sg]  
-  /*user_data= <<-EOF # creating user Data  
+  user_data= <<-EOF # creating user Data  
 #!/bin/bash  
-i=1
-for INSTANCE in $(aws autoscaling describe-auto-scaling-instances --query AutoScalingInstances[].InstanceId --output text)
-do
-echo $INSTANCE
-aws ec2 create-tags --resources $INSTANCE --tags Key=Name,Value="tokyo_instance"$i
-i=$((i+1))
-echo $INSTANCE
-done   */
+i=1 -y
+for INSTANCE in $(aws autoscaling describe-auto-scaling-instances --query AutoScalingInstances[].InstanceId --output text) -y
+aws ec2 create-tags --resources $INSTANCE --tags Key=Name,Value="tokyo_instance"$i -y
+i=$((i+1)) -y
+done -y
 }
 
 resource "aws_autoscaling_group" "tokyo_asg" {
