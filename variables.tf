@@ -53,12 +53,12 @@ variable "extra_tags" {
   default = [
     {
       key                 = "Foo"
-      value               = "Bar"
+      value               = "tokyo-instance-0"
       propagate_at_launch = true
     },
     {
       key                 = "Baz"
-      value               = "Bam"
+      value               = "tokyo-instance-1"
       propagate_at_launch = true
     },
   ]
