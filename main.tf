@@ -38,7 +38,7 @@ resource "aws_launch_template" "tokyo_launch_template" {
     
 
     tags = {
-      Name = "tokyo_instance_test"
+      #Name = ${NEW_NAME}
       #Name = "tokyo_instance_test_${count.index}"
       instance_state_names = "running"
     }
