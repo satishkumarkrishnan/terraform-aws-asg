@@ -22,6 +22,3 @@ output "asg_alb_hosted_zone_id" {
   value = aws_lb.test.zone_id
 }
 
-output "instance_id" {
-  value = data.aws_instance.tokyo_test.id
-  }

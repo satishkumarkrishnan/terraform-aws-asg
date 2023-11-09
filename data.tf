@@ -17,6 +17,6 @@ data "aws_instance" "tokyo_test"{
   filter {
     name = "instance-state-name"
     values = ["running"]
-  }  
-  depends_on = [aws_launch_configuration.tokyo_launch_config]
+  } 
+  depends_on = [ module.vpc]
 }
