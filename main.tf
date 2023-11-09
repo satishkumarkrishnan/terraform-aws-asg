@@ -33,6 +33,7 @@ for INSTANCE in $(aws autoscaling describe-auto-scaling-instances --query AutoSc
 aws ec2 create-tags --resources $INSTANCE --tags Key=Name,Value="tokyo_instance"$i -y
 i=$((i+1)) -y
 done -y
+EOF
 }
 
 resource "aws_autoscaling_group" "tokyo_asg" {
