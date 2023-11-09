@@ -26,8 +26,16 @@ resource "aws_launch_template" "tokyo_launch_template" {
   user_data     = filebase64("${path.module}/user_data.sh")
   key_name      = "ec2-key"
   vpc_security_group_ids = [module.vpc.vpc_fe_sg]  
+  /*user_data= <<-EOF # creating user Data  
+  ID=$(curl http://169.254.169.254/latest/meta-data/instance-id)
+  CURRENT_NAME=$(aws ec2 describe-tags --filters Name=resource-id,Values=${ID} Name=key,Values=Name --query Tags[].Value --output text
+  NEW_NAME=${CURRENT_NAME}-${ID}
+  aws ec2 create-tags --resources ${ID} --tags Key=Name,Value=${NEW_NAME}
+  EOF*/
+ 
   tag_specifications {
     resource_type = "instance"
+    
 
     tags = {
       Name = "tokyo_instance_test"
