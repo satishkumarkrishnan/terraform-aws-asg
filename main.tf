@@ -35,16 +35,17 @@ resource "aws_autoscaling_group" "tokyo_asg" {
   health_check_type      = "EC2"
   vpc_zone_identifier    = [module.vpc.vpc_fe_subnet.id, module.vpc.vpc_be_subnet.id]
   launch_configuration   = aws_launch_configuration.tokyo_launch_config.name
-    }
-    /*dynamic "tag" {
-    for_each = data.aws_default_tags.tokyo_tags
+    
+    dynamic "tag" {
+    for_each = var.extra_tags
     content {
-      key                 = tag.key
-      value               = tag.value
-      propagate_at_launch = true
+      key                 = tag.value.key
+      propagate_at_launch = tag.value.propagate_at_launch
+      value               = tag.value.value
     }
   }
- }*/
+}
+ 
 
  resource "aws_autoscaling_policy" "tokyo_asg_policy" {
   name                   = "tokyo-asg-policy"
