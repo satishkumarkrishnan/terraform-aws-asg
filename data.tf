@@ -10,7 +10,7 @@ data "aws_availability_zones" "available" {
 data "aws_instance" "tokyo_test"{
  
   filter{
-    name = "availability_zone"
+    name = "availability-zone"
     values = ["ap-northeast-1a"]
   }
  
