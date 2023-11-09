@@ -44,6 +44,13 @@ resource "aws_autoscaling_group" "tokyo_asg" {
       value               = tag.value.value
     }
   }
+  instance_refresh {
+    strategy = "Rolling"
+    preferences {
+      min_healthy_percentage = 50
+    }
+    triggers = ["tag"]
+  }
 }
  
 
