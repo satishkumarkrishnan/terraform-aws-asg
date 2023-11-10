@@ -26,6 +26,17 @@ resource "aws_launch_configuration" "tokyo_launch_config" {
   #user_data     = filebase64("${path.module}/user_data.sh")
   key_name      = "ec2-key"
   security_groups = [module.vpc.vpc_fe_sg]  
+  user_data = <<-EOF
+               #!/bin/bash
+               i=1
+               for INSTANCE in $(aws autoscaling describe-auto-scaling-instances --query AutoScalingInstances[].InstanceId --output text);
+               do
+               echo $INSTANCE	
+               aws ec2 create-tags --resources $INSTANCE --tags Key=Name,Value="tokyo_instance"$i
+               i=$((i+1));
+               echo $INSTANCE	
+              done  
+              EOF
 }
 
 resource "aws_autoscaling_group" "tokyo_asg" {
@@ -34,19 +45,7 @@ resource "aws_autoscaling_group" "tokyo_asg" {
   min_size               = var.min_size
   health_check_type      = "EC2"
   vpc_zone_identifier    = [module.vpc.vpc_fe_subnet.id, module.vpc.vpc_be_subnet.id]
-  launch_configuration   = aws_launch_configuration.tokyo_launch_config.name 
-   connection {
-    type     = "ssh"
-    user     = "root"
-    private_key = aws_key_pair.deployer.key_name
-    host     = self.public_ip
-  }    
-  provisioner "remote-exec" {
-#    command = "/bin/bash tag.sh"
-    inline = [
-      "/bin/bash tag.sh",      
-    ]
-  }
+  launch_configuration   = aws_launch_configuration.tokyo_launch_config.name    
 }
 
  /*resource "null_resource" "tokyo_test"{
