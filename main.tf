@@ -54,7 +54,10 @@ resource "aws_autoscaling_group" "tokyo_asg" {
   min_size               = var.min_size
   health_check_type      = "EC2"
   vpc_zone_identifier    = [module.vpc.vpc_fe_subnet.id, module.vpc.vpc_be_subnet.id]
-  launch_configuration   = aws_launch_template.tokyo_launch_template.id
+  launch_template {
+      id      = aws_launch_template.tokyo_launch_template.id      
+      version = "$Latest"
+    }
 }
 
  resource "aws_autoscaling_policy" "tokyo_asg_policy" {
