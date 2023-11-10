@@ -34,23 +34,7 @@ resource "aws_autoscaling_group" "tokyo_asg" {
   min_size               = var.min_size
   health_check_type      = "EC2"
   vpc_zone_identifier    = [module.vpc.vpc_fe_subnet.id, module.vpc.vpc_be_subnet.id]
-  launch_configuration   = aws_launch_configuration.tokyo_launch_config.name
-      
-    dynamic "tag" {
-    for_each = var.extra_tags
-    content {
-      key                 = tag.value.key
-      propagate_at_launch = tag.value.propagate_at_launch
-      value               = tag.value.value
-    }
-  }
-  instance_refresh {
-    strategy = "Rolling"
-    preferences {
-      min_healthy_percentage = 50
-    }
-    triggers = ["tag"]
-  }
+  launch_configuration   = aws_launch_configuration.tokyo_launch_config.name     
 }
  
 
