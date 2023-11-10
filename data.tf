@@ -6,3 +6,4 @@ data "aws_ami" "ami" {
 data "aws_availability_zones" "available" {
   state = "available"
 }
+

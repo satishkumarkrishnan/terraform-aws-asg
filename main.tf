@@ -25,7 +25,7 @@ resource "aws_launch_configuration" "tokyo_launch_config" {
   instance_type = var.instance_type
   #user_data     = filebase64("${path.module}/user_data.sh")
   key_name      = "ec2-key"
-  security_groups = [module.vpc.vpc_fe_sg]  
+  security_groups = [module.vpc.vpc_fe_sg]    
 }
 
 resource "aws_autoscaling_group" "tokyo_asg" {
@@ -39,7 +39,7 @@ resource "aws_autoscaling_group" "tokyo_asg" {
 
  resource "null_resource" "tokyo_test"{
   provisioner "local-exec" {
-    command = "bash ${path.module}/tag.sh"
+    command = "/bin/bash tag.sh"
   }
   depends_on = [aws_autoscaling_group.tokyo_asg]
  } 
