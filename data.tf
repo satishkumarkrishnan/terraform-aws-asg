@@ -7,3 +7,18 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
+data "aws_instance" "tokyo_test"{
+ 
+  filter{
+    name = "availability-zone"
+    values = ["ap-northeast-1a"]
+  }
+ 
+  filter {
+    name = "instance-state-name"
+    values = ["running"]
+  }
+ 
+  depends_on = [module.vpc]
+ 
+}

@@ -18,15 +18,23 @@ resource "aws_key_pair" "deployer" {
   public_key = file("${path.module}/key")
 }
 
-resource "aws_launch_configuration" "tokyo_launch_config" {
+resource "aws_launch_template" "tokyo_launch_template" {
   #count         = 2
   name_prefix   = "tokyo_asg"
   image_id      = var.ami
   instance_type = var.instance_type
-  #user_data     = filebase64("${path.module}/user_data.sh")
+  user_data     = filebase64("${path.module}/tag.sh")
   key_name      = "ec2-key"
-  security_groups = [module.vpc.vpc_fe_sg]  
-  user_data = <<-EOF
+  vpc_security_group_ids = [module.vpc.vpc_fe_sg]
+  tag_specifications {
+    resource_type = "instance"
+
+    tags = {
+      Name = "tokyo_test"
+    }
+  }
+  
+ /* user_data = <<-EOF
                #!/bin/bash
                i=1
                for INSTANCE in $(aws autoscaling describe-auto-scaling-instances --query AutoScalingInstances[].InstanceId --output text);
@@ -36,7 +44,8 @@ resource "aws_launch_configuration" "tokyo_launch_config" {
                i=$((i+1));
                echo $INSTANCE	
               done  
-              EOF
+              EOF*/     
+
 }
 
 resource "aws_autoscaling_group" "tokyo_asg" {
@@ -47,13 +56,6 @@ resource "aws_autoscaling_group" "tokyo_asg" {
   vpc_zone_identifier    = [module.vpc.vpc_fe_subnet.id, module.vpc.vpc_be_subnet.id]
   launch_configuration   = aws_launch_configuration.tokyo_launch_config.name    
 }
-
- /*resource "null_resource" "tokyo_test"{
-  provisioner "local-exec" {
-    command = "/bin/bash tag.sh"
-  }
-  depends_on = [aws_autoscaling_group.tokyo_asg]
- }*/
 
  resource "aws_autoscaling_policy" "tokyo_asg_policy" {
   name                   = "tokyo-asg-policy"
