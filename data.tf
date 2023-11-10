@@ -19,6 +19,6 @@ data "aws_instance" "tokyo_test"{
     values = ["running"]
   }
  
-  depends_on = [module.vpc]
+  depends_on = [aws_autoscaling_group.tokyo_asg]
  
 }
