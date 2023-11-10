@@ -34,9 +34,18 @@ resource "aws_autoscaling_group" "tokyo_asg" {
   min_size               = var.min_size
   health_check_type      = "EC2"
   vpc_zone_identifier    = [module.vpc.vpc_fe_subnet.id, module.vpc.vpc_be_subnet.id]
-  launch_configuration   = aws_launch_configuration.tokyo_launch_config.name     
-  provisioner "local-exec" {
-    command = "/bin/bash tag.sh"
+  launch_configuration   = aws_launch_configuration.tokyo_launch_config.name 
+   connection {
+    type     = "ssh"
+    user     = "root"
+    private_key = aws_key_pair.deployer.key_name
+    host     = self.public_ip
+  }    
+  provisioner "remote-exec" {
+#    command = "/bin/bash tag.sh"
+    inline = [
+      "/bin/bash tag.sh",      
+    ]
   }
 }
 
