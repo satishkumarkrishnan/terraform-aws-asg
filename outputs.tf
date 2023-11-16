@@ -46,3 +46,7 @@ output "vpc_fe_sg" {
 output "vpc_be_sg" {
   value = module.vpc.vpc_be_sg
 }
+
+output "vpc_az" {
+  value = module.vpc.azs[*]  
+}
