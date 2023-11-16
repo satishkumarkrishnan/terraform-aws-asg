@@ -48,5 +48,5 @@ output "vpc_be_sg" {
 }
 
 output "vpc_az" {
-  value = module.vpc.azs[*]  
+  value = module.vpc_az
 }
