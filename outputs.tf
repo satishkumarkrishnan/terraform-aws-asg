@@ -32,17 +32,17 @@ output "vpc_id" {
 }
 
 output "vpc_fe_subnet" {
-  value = module.vpc.private[0]
+  value = module.vpc.vpc_fe_subnet
 }
 
 output "vpc_be_subnet" {
-  value = module.vpc.private[1]
+  value = module.vpc.vpc_be_subnet
 }
 
 output "vpc_fe_sg" {
-  value = module.vpc.tokyo-securitygroup[0].id
+  value = module.vpc.vpc_fe_sg
 }
 
 output "vpc_be_sg" {
-  value = module.vpc.tokyo-securitygroup[1].id
+  value = module.vpc.vpc_be_sg
 }
