@@ -47,6 +47,10 @@ output "vpc_be_sg" {
   value = module.vpc.vpc_be_sg
 }
 
-output "vpc_az" {
-  value = module.vpc_az
+output "vpc_az1" {
+  value = module.vpc_az1
+}
+
+output "vpc_az2" {
+  value = module.vpc_az2
 }
