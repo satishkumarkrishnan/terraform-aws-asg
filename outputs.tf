@@ -25,3 +25,24 @@ output "asg_alb_hosted_zone_id" {
 output "instance_id" {
   value = data.aws_instance.tokyo_test.id  
 }
+
+#VPC Outputs
+output "vpc_id" {
+  value = module.vpc.vpc_id
+}
+
+output "vpc_fe_subnet" {
+  value = module.vpc.private[0]
+}
+
+output "vpc_be_subnet" {
+  value = module.vpc.private[1]
+}
+
+output "vpc_fe_sg" {
+  value = module.vpc.tokyo-securitygroup[0].id
+}
+
+output "vpc_be_sg" {
+  value = module.vpc.tokyo-securitygroup[1].id
+}
