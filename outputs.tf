@@ -54,3 +54,7 @@ output "vpc_az1" {
 output "vpc_az2" {
   value = module.vpc.vpc_az[1]
 }
+
+output "vpc_subnet" {
+  value = module.vpc.vpc_fe_subnet.id
+}
