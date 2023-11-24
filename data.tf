@@ -22,3 +22,4 @@ data "aws_instance" "tokyo_test"{
   depends_on = [aws_autoscaling_group.tokyo_asg]
  
 }
+
