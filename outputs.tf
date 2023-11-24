@@ -62,3 +62,8 @@ output "vpc_az2" {
 output "vpc_subnet" {
   value = module.vpc.vpc_fe_subnet.id
 }
+
+#EFS output
+output "efs_file_system_dns" {
+  value = aws_efs_file_system.tokyo_efs.dns_name
+}

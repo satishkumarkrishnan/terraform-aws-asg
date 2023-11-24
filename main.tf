@@ -13,8 +13,8 @@ module "vpc" {
     source ="git@github.com:satishkumarkrishnan/terraform-aws-vpc.git?ref=main"
 }
 
-module "efs" {
-  source ="git@github.com:satishkumarkrishnan/Terraform-EFS.git?ref=main"
+module "kms" {
+  source ="git@github.com:satishkumarkrishnan/Terraform-KMS.git?ref=main"  
 }
 
 resource "aws_key_pair" "deployer" {
@@ -28,12 +28,12 @@ resource "aws_launch_template" "tokyo_launch_template" {
   image_id      = var.ami
   instance_type = var.instance_type
   user_data = templatefile("${path.module}/efs_mount.sh", {
-    efs_hostname = module.efs.efs_file_system_dns
+    #efs_hostname = module.efs.efs_file_system_dns
+    efs_hostname = aws_efs_file_system.tokyo_efs.dns_name
   })
   
   key_name      = "ec2-key"
-  vpc_security_group_ids = [module.vpc.vpc_fe_sg]
-  depends_on = [data.aws_efs_file_system ]
+  vpc_security_group_ids = [module.vpc.vpc_fe_sg]  
   tag_specifications {
     resource_type = "instance"
 
