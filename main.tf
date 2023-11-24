@@ -9,9 +9,9 @@ terraform {
   }
 }
 
-#module "vpc" {
-#    source ="git@github.com:satishkumarkrishnan/terraform-aws-vpc.git?ref=main"
-#}
+module "vpc" {
+    source ="git@github.com:satishkumarkrishnan/terraform-aws-vpc.git?ref=main"
+}
 
 module "efs" {
   source ="git@github.com:satishkumarkrishnan/Terraform-EFS.git?ref=main"
