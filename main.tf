@@ -10,9 +10,12 @@ terraform {
 }
 
 module "vpc" {
-    source ="git@github.com:satishkumarkrishnan/terraform-aws-vpc.git?ref=main"
+  source ="git@github.com:satishkumarkrishnan/terraform-aws-vpc.git?ref=main"
 }
 
+module "kms" {
+  source="git@github.com:satishkumarkrishnan/Terraform-KMS.git?ref=main"  
+}
 
 resource "aws_key_pair" "deployer" {
   key_name   = "ec2-key"
