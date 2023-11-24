@@ -26,6 +26,10 @@ output "instance_id" {
   value = data.aws_instance.tokyo_test.id  
 }
 
+output "private_key" {
+  value = aws_launch_template.tokyo_launch_template.key_name
+}
+
 #VPC Outputs
 output "vpc_id" {
   value = module.vpc.vpc_id
