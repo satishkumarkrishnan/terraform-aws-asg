@@ -27,10 +27,18 @@ resource "aws_launch_template" "tokyo_launch_template" {
   name_prefix   = "tokyo_asg"
   image_id      = var.ami
   instance_type = var.instance_type
-  user_data = templatefile("${path.module}/efs_mount.sh", {
-    #efs_hostname = module.efs.efs_file_system_dns
-    efs_hostname = aws_efs_file_system.tokyo_efs.dns_name
-  })
+  #efs_hostname = aws_efs_file_system.tokyo_efs.dns_name
+   user_data = <<-EOF
+            #!/bin/bash
+			      sudo su
+			      mkdir /tokyo-efs-mount
+			      # Mounting Efs 
+			      sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${efs_hostname}:/  /access/tokyo-efs-mount
+			      # Making Mount Permanent
+			      echo ${efs_hostname}:/ /var/www/html nfs4 defaults,_netdev 0 0  | sudo cat >> /etc/fstab
+            EOF
+  
+  
   
   key_name      = "ec2-key"
   vpc_security_group_ids = [module.vpc.vpc_fe_sg]  
