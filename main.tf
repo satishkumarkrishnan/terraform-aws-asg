@@ -37,9 +37,7 @@ resource "aws_launch_template" "tokyo_launch_template" {
 			      # Making Mount Permanent
 			      echo ${efs_hostname}:/ /var/www/html nfs4 defaults,_netdev 0 0  | sudo cat >> /etc/fstab
             EOF
-  
-  
-  
+   
   key_name      = "ec2-key"
   vpc_security_group_ids = [module.vpc.vpc_fe_sg]  
   tag_specifications {
