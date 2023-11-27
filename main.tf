@@ -33,9 +33,10 @@ resource "aws_launch_template" "tokyo_launch_template" {
 			      sudo su
 			      mkdir /tokyo-efs-mount
 			      # Mounting Efs 
-			      sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${efs_hostname}:/  /access/tokyo-efs-mount
+            sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${aws_efs_file_system.tokyo_efs.dns_name}:/  /access/tokyo-efs-mount
+#			      sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${efs_hostname}:/  /tokyo-efs-mount
 			      # Making Mount Permanent
-			      echo ${efs_hostname}:/ /var/www/html nfs4 defaults,_netdev 0 0  | sudo cat >> /etc/fstab
+			      echo ${aws_efs_file_system.tokyo_efs.dns_name}:/ /var/www/html nfs4 defaults,_netdev 0 0  | sudo cat >> /etc/fstab
             EOF
    
   key_name      = "ec2-key"
