@@ -109,5 +109,6 @@ variable "allIPsCIDRblock" {
 }
 
 variable "efs_file_system_dns" {
+  type        = map(string)
   default = "aws_efs_file_system.tokyo_efs.dns_name"
 }
