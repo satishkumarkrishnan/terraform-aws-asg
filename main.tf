@@ -33,7 +33,7 @@ resource "aws_launch_template" "tokyo_launch_template" {
    
   key_name      = "ec2-key"
   vpc_security_group_ids = [module.vpc.vpc_fe_sg]  
-  depends_on = [aws_efs_file_system.tokyo_efs.id]
+  depends_on = [aws_efs_file_system.tokyo_efs]
   tag_specifications {
     resource_type = "instance"
 
