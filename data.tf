@@ -36,6 +36,7 @@ data "aws_iam_policy_document" "policy" {
     actions = [
       "elasticfilesystem:ClientMount",
       "elasticfilesystem:ClientWrite",
+      "elasticfilesystem:ClientRootAccess"
     ]
 
     resources = [aws_efs_file_system.tokyo_efs.arn]
