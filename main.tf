@@ -27,7 +27,7 @@ resource "aws_launch_template" "tokyo_launch_template" {
   name_prefix   = "tokyo_asg"
   image_id      = var.ami
   instance_type = var.instance_type  
-  user_data = templatefile("${path.module}/efs_mount.sh", {
+  user_data = filebase64("${path.module}/efs_mount.sh", {
     efs_hostname = aws_efs_file_system.tokyo_efs.dns_name
   })
    
