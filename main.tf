@@ -31,7 +31,7 @@ resource "aws_launch_template" "tokyo_launch_template" {
   user_data = "${base64encode(<<EOF
   <shell>
   $file_content = @"
-  ${templatefile("efs_mount.sh", var.efs_file_system_dns)}    
+  ${templatefile("efs_mount.sh", aws_efs_file_system.tokyo_efs.dns_name)}    
   "@
   </shell>
 EOF
