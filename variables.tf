@@ -107,3 +107,7 @@ variable "server_port" {
 variable "allIPsCIDRblock" {
   default = "0.0.0.0/0"
 }
+
+variable "efs_file_system_dns" {
+  default = "aws_efs_file_system.tokyo_efs.dns_name"
+}
