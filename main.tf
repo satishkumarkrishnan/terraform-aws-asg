@@ -26,40 +26,22 @@ resource "aws_launch_template" "tokyo_launch_template" {
   #count         = 2
   name_prefix   = "tokyo_asg"
   image_id      = var.ami
-  instance_type = var.instance_type
-  #efs_hostname = aws_efs_file_system.tokyo_efs.dns_name
-   #user_data = <<-EOF
-   #         #!/bin/bash
-	#		      sudo su
-#			      mkdir /tokyo-efs-mount
-			      # Mounting Efs 
-            #sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${aws_efs_file_system.tokyo_efs.dns_name}:/  /access/tokyo-efs-mount
-			      # Making Mount Permanent
-			      # echo ${aws_efs_file_system.tokyo_efs.dns_name}:/ /var/www/html nfs4 defaults,_netdev 0 0  | sudo cat >> /etc/fstab
-#            EOF
+  instance_type = var.instance_type  
+  user_data = templatefile("${path.module}/efs_mount.sh", {
+    efs_hostname = aws_efs_file_system.tokyo_efs.dns_name
+  })
    
   key_name      = "ec2-key"
   vpc_security_group_ids = [module.vpc.vpc_fe_sg]  
+  depends_on = [aws_efs_file_system.tokyo_efs.id]
   tag_specifications {
     resource_type = "instance"
 
     tags = {
       Name = "tokyo_test"
     }
-  }
-  
- /* user_data = <<-EOF
-               #!/bin/bash
-               i=1
-               for INSTANCE in $(aws autoscaling describe-auto-scaling-instances --query AutoScalingInstances[].InstanceId --output text);
-               do
-               echo $INSTANCE	
-               aws ec2 create-tags --resources $INSTANCE --tags Key=Name,Value="tokyo_instance"$i
-               i=$((i+1));
-               echo $INSTANCE	
-              done  
-              EOF*/     
-
+  } 
+ 
 }
 
 resource "aws_autoscaling_group" "tokyo_asg" {
@@ -72,6 +54,7 @@ resource "aws_autoscaling_group" "tokyo_asg" {
       id      = aws_launch_template.tokyo_launch_template.id      
       version = "$Latest"
     }
+
 }
 
  resource "aws_autoscaling_policy" "tokyo_asg_policy" {
