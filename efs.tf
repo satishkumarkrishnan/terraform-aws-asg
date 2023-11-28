@@ -29,7 +29,7 @@ resource "aws_efs_access_point" "tokyo_EFS_accesspoint" {
   }
 
   root_directory {
-    path = "/access"
+    path = "/"
     creation_info {
       owner_gid   = 1000
       owner_uid   = 1000
