@@ -1,4 +1,4 @@
-/*output "asg_name" {
+output "asg_name" {
   value = aws_autoscaling_group.tokyo_asg.name
 }
 
@@ -28,7 +28,7 @@ output "instance_id" {
 
 output "private_key" {
   value = aws_launch_template.tokyo_launch_template.key_name
-}*/
+}
 
 #VPC Outputs
 output "vpc_id" {
