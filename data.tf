@@ -18,14 +18,13 @@ data "aws_instance" "tokyo_test"{
     name = "instance-state-name"
     values = ["running"]
   }
- 
-  depends_on = [aws_autoscaling_group.tokyo_asg]
+  
  
 }
 # EFS Policy JSON
 data "aws_iam_policy_document" "policy" {
   statement {
-    sid    = "ExampleStatement01"
+    sid    = "Allow ssl to mount"
     effect = "Allow"
 
     principals {
@@ -34,9 +33,9 @@ data "aws_iam_policy_document" "policy" {
     }
 
     actions = [
+      "elasticfilesystem:ClientRootAccess",
       "elasticfilesystem:ClientMount",
-      "elasticfilesystem:ClientWrite",
-      "elasticfilesystem:ClientRootAccess"
+      "elasticfilesystem:ClientWrite"      
     ]
 
     resources = [aws_efs_file_system.tokyo_efs.arn]

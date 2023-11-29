@@ -20,12 +20,20 @@ resource "aws_efs_file_system" "tokyo_efs" {
   }
 }
 
-#EFS Mount Target
+#EFS Mount Target in FE SG
 resource "aws_efs_mount_target" "tokyo_EFS_mount" {
   file_system_id  = aws_efs_file_system.tokyo_efs.id
   subnet_id       = module.vpc.vpc_fe_subnet.id
-  security_groups = [ module.vpc.vpc_fe_sg, module.vpc.vpc_be_sg ] 
-  depends_on = [module.vpc] 
+  #security_groups = [ module.vpc.vpc_fe_sg, module.vpc.vpc_be_sg ] 
+  security_groups = [module.vpc.vpc_fe_sg]  
+}
+
+#EFS Mount Target in BE SG
+resource "aws_efs_mount_target" "tokyo_EFS_mount" {
+  file_system_id  = aws_efs_file_system.tokyo_efs.id
+  subnet_id       = module.vpc.vpc_fe_subnet.id
+  #security_groups = [ module.vpc.vpc_be_sg, module.vpc.vpc_be_sg ] 
+  security_groups = [module.vpc.vpc_be_sg]  
 }
 
 #EFS Access Point
@@ -37,11 +45,11 @@ resource "aws_efs_access_point" "tokyo_EFS_accesspoint" {
   }
 
   root_directory {
-    path = "/access"
+    path = ""
     creation_info {
       owner_gid   = 1000
       owner_uid   = 1000
-      permissions = "0777"
+      permissions = 755
     }
   }
   tags = {
