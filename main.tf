@@ -39,7 +39,7 @@ EOF
    
   key_name      = "ec2-key"
   vpc_security_group_ids = [module.vpc.vpc_fe_sg]  
-  depends_on = [aws_efs_file_system.tokyo_efs]
+  depends_on = [aws_efs_file_system.tokyo_efs.arn] 
   tag_specifications {
     resource_type = "instance"
 
@@ -60,7 +60,7 @@ resource "aws_autoscaling_group" "tokyo_asg" {
       id      = aws_launch_template.tokyo_launch_template.id      
       version = "$Latest"
     }
-  depends_on = [aws_efs_file_system.tokyo_efs]  
+  depends_on = [aws_efs_file_system.tokyo_efs.arn]  
 
 }
 
@@ -70,4 +70,5 @@ resource "aws_autoscaling_group" "tokyo_asg" {
   adjustment_type        = "ChangeInCapacity"
   cooldown               = 300
   autoscaling_group_name = aws_autoscaling_group.tokyo_asg.name  
+  depends_on = [aws_efs_file_system.tokyo_efs.arn] 
 }
