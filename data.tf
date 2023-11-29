@@ -20,7 +20,7 @@ data "aws_availability_zones" "available" {
   }
   depends_on = [module.vpc]
  
-}*/
+}
 # EFS Policy JSON
 data "aws_iam_policy_document" "policy" {
   statement {
@@ -46,4 +46,4 @@ data "aws_iam_policy_document" "policy" {
       values   = ["true"]
     }
   }
-}
+}*/
