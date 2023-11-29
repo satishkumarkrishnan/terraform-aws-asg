@@ -1,3 +1,11 @@
+module "vpc" {
+  source ="git@github.com:satishkumarkrishnan/terraform-aws-vpc.git?ref=main"
+}
+
+module "kms" {
+  source="git@github.com:satishkumarkrishnan/Terraform-KMS.git?ref=main"  
+}
+
 #Adding lifecycle Policy
 resource "aws_efs_file_system" "tokyo_efs" {
  creation_token = "tokyo_token"
