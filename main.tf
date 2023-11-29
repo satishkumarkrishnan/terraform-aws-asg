@@ -22,7 +22,7 @@ resource "aws_key_pair" "deployer" {
   public_key = file("${path.module}/key")
 }
 
-resource "aws_launch_template" "tokyo_launch_template" {
+/*resource "aws_launch_template" "tokyo_launch_template" {
   #count         = 2
   name_prefix   = "tokyo_asg"
   image_id      = var.ami
@@ -71,4 +71,4 @@ resource "aws_autoscaling_group" "tokyo_asg" {
   cooldown               = 300
   autoscaling_group_name = aws_autoscaling_group.tokyo_asg.name  
   depends_on = [aws_efs_file_system.tokyo_efs] 
-}
+}*/
