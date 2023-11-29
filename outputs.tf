@@ -1,4 +1,4 @@
-output "asg_name" {
+/*output "asg_name" {
   value = aws_autoscaling_group.tokyo_asg.name
 }
 
@@ -22,13 +22,13 @@ output "asg_alb_hosted_zone_id" {
   value = aws_lb.test.zone_id
 }
 
-/*output "instance_id" {
+output "instance_id" {
   value = data.aws_instance.tokyo_test.id  
-}*/
+}
 
 output "private_key" {
   value = aws_launch_template.tokyo_launch_template.key_name
-}
+}*/
 
 #VPC Outputs
 output "vpc_id" {

@@ -5,8 +5,6 @@ resource "aws_lb" "test" {
   name                       = "tokyo-alb"
   load_balancer_type         = "application"
   security_groups = [module.vpc.vpc_fe_sg, module.vpc.vpc_be_sg]
-  #security_groups = [data.aws_security_group.fe_security_id.id, data.aws_security_group.be_security_id.id ]
-  #subnets      = [data.aws_subnet.fe_subnet.id, data.aws_subnet.be_subnet.id]
   subnets      = [module.vpc.vpc_fe_subnet.id, module.vpc.vpc_be_subnet.id]
   enable_deletion_protection = true
 }
@@ -15,8 +13,7 @@ resource "aws_lb_target_group" "target-group" {
   name        = "tokyo-tg"
   port        = 80
   protocol    = "HTTP"
-  target_type = "instance"
-  #vpc_id      = data.aws_vpc.tokyo_vpc.id
+  target_type = "instance"  
   vpc_id      = module.vpc.vpc_id
 
   health_check {
