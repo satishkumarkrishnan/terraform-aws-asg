@@ -60,6 +60,7 @@ resource "aws_autoscaling_group" "tokyo_asg" {
       id      = aws_launch_template.tokyo_launch_template.id      
       version = "$Latest"
     }
+  depends_on = [aws_efs_file_system.tokyo_efs]  
 
 }
 
