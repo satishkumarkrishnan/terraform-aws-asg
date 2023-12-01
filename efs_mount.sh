@@ -9,6 +9,9 @@ EC2_REGION="ap-northeast-1"
 # Creates the mount-point for the EFS filesystem
 DIR_TGT="/tmp/efs"
 mkdir "${DIR_TGT}"
+# Name of the EFS filesystem (match what was created in EFS)
+EFS_FILE_SYSTEM_NAME=${efs_hostname}
+
 # Get the EFS filesystem ID.
 EFS_FILE_SYSTEM_ID="$(/usr/local/bin/aws efs describe-file-systems --region "${EC2_REGION}" | jq '.FileSystems[]' | jq "select(.Name==\"${EFS_FILE_SYSTEM_NAME}\")" | jq -r '.FileSystemId')"
 if [ -z "${EFS_FILE_SYSTEM_ID}" ]; then
