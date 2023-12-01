@@ -1,5 +1,6 @@
 #!/bin/bash
 sudo su - 
+yum install amazon-efs-utils -y
 mkdir /tmp/efs
 echo ${efs_hostname} >> /tmp/efs/efs_name
 # Actually mount the EFS filesystem
