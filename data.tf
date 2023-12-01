@@ -35,12 +35,7 @@ data "aws_availability_zones" "available" {
 }*/
 data "template_file" "test" {
   template = "${file("${path.module}/efs_mount.sh")}" 
-  vars = {
-    EC2_REGION = "ap-northeast-1"
+  vars = {  
     EFS_FILE_SYSTEM_NAME = "${aws_efs_file_system.tokyo_efs.dns_name}"
-    DIR_TGT = "/tmp/efs"
-    EFS_FILE_SYSTEM_NAME = "${efs_hostname}"
-    DIR_SRC = "${EFS_FILE_SYSTEM_ID}.efs.${EC2_REGION}.amazonaws.com"
-    
   }
 }
