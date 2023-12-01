@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo su - 
+#sudo su - 
 mkdir /tmp/efs
 echo pwd > /tmp/efs_name.log
 # Mounting Efs 

@@ -34,9 +34,8 @@ data "aws_availability_zones" "available" {
   }
 }*/
 data "template_file" "test" {
-  template = <<EOF
-    mkdir /efs
-    #mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport aws_efs_file_system.tokyo_efs.dns_name:/ /efs
-    mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-05b29b27ec050cfe1.efs.ap-northeast-1.amazonaws.com:/ efs
-  EOF
+  template = "${file("${path.module}/efs_mount.sh")}" 
+  vars = {
+    efs_hostname = "${aws_efs_file_system.tokyo_efs.dns_name}"
+  }
 }
