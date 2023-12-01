@@ -29,8 +29,10 @@ resource "aws_launch_template" "tokyo_launch_template" {
   instance_type = var.instance_type  
   #efs_hostname = aws_efs_file_system.tokyo_efs.dns_name
   user_data = "${base64encode(<<EOF
-  mkdir /tmp/efs
-  mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,soft,timeo=600,retrans=2 ${aws_efs_file_system.tokyo_efs.dns_name}:/" /tmp/efs
+#!/bin/bash
+sudo su -  
+mkdir /tmp/efs
+mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,soft,timeo=600,retrans=2 ${aws_efs_file_system.tokyo_efs.dns_name}:/" /tmp/efs
   EOF
 )}"   
   #user_data = "${base64encode(<<-EOT
