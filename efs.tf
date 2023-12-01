@@ -56,8 +56,6 @@ resource "aws_efs_access_point" "tokyo_EFS_accesspoint" {
     Name = "Tokyo-EFS-Accesspoint"
   }
 }
-
-
 /*resource "aws_efs_file_system_policy" "policy" {
   file_system_id = aws_efs_file_system.tokyo_efs.id
   policy         = data.aws_iam_policy_document.policy.json
