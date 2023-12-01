@@ -28,10 +28,15 @@ resource "aws_launch_template" "tokyo_launch_template" {
   image_id      = var.ami
   instance_type = var.instance_type  
   #efs_hostname = aws_efs_file_system.tokyo_efs.dns_name
-  user_data = "${base64encode(<<EOF
-  ${templatefile("efs_mount.sh",{efs_hostname = aws_efs_file_system.tokyo_efs.dns_name})}    
-  EOF
-)}"  
+  #user_data = "${base64encode(<<EOF
+  #${templatefile("efs_mount.sh",{efs_hostname = aws_efs_file_system.tokyo_efs.dns_name})}    
+  #EOF
+#)}"  
+  user_data = <<-EOF
+              #!/bin/bash
+              mkdir /efs
+              mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport {efs_hostname =aws_efs_file_system.tokyo_efs_system_dns_name}:/ /efs
+              EOF
    
   key_name      = "ec2-key"
   vpc_security_group_ids = [module.vpc.vpc_fe_sg]  
