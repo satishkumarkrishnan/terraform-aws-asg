@@ -28,10 +28,11 @@ resource "aws_launch_template" "tokyo_launch_template" {
   image_id      = var.ami
   instance_type = var.instance_type  
   #efs_hostname = aws_efs_file_system.tokyo_efs.dns_name
-  user_data = "${base64encode(<<EOF
-  ${templatefile("efs_mount.sh",{efs_hostname = aws_efs_file_system.tokyo_efs.dns_name})}    
-  EOF
-)}"   
+  #user_data = "${base64encode(<<EOF
+  #${templatefile("efs_mount.sh",{efs_hostname = aws_efs_file_system.tokyo_efs.dns_name})}    
+  #EOF
+#)}"   
+  user_data = "${base64encode(data.template_file.test.rendered)}"
   key_name      = "ec2-key"
   vpc_security_group_ids = [module.vpc.vpc_fe_sg]  
   depends_on = [aws_efs_file_system.tokyo_efs] 
