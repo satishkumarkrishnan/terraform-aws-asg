@@ -34,8 +34,8 @@ resource "aws_launch_template" "tokyo_launch_template" {
 #)}"  
   user_data = <<-EOF
               #!/bin/bash
-              mkdir /efs
-              #mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport {efs_hostname =aws_efs_file_system.tokyo_efs_system_dns_name}:/ /efs
+              sudo mkdir /efs
+              #sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport {efs_hostname =aws_efs_file_system.tokyo_efs_system_dns_name}:/ /efs
               EOF
    
   key_name      = "ec2-key"
