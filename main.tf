@@ -33,7 +33,7 @@ resource "aws_launch_template" "tokyo_launch_template" {
   #EOF
 #)}"   
   user_data = "${base64encode(<<-EOT
-    sudo echo "efs_hostname = ${aws_efs_file_system.tokyo_efs.dns_name}" > /tmp/efs_dns
+    ${templatefile("efs_mount.sh",{efs_hostname = aws_efs_file_system.tokyo_efs.dns_name})}
   EOT
   )}"
   key_name      = "ec2-key"

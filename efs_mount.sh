@@ -1,7 +1,6 @@
 #!/bin/bash
 #sudo su - 
 mkdir /tmp/efs
-echo pwd > /tmp/efs_name.log
 # Mounting Efs 
 #mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${efs_hostname}:/  ~/tokyo-efs-mount
 sudo echo ${efs_hostname} >> /tmp/efs_name
