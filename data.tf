@@ -36,6 +36,6 @@ data "aws_availability_zones" "available" {
 data "template_file" "test" {
   template = "${file("${path.module}/efs_mount.sh")}" 
   vars = {  
-    efs_hostname = "${aws_efs_file_system.tokyo_efs.dns_name}"
+    efs_name = "${aws_efs_file_system.tokyo_efs.dns_name}"
   }
 }
