@@ -26,7 +26,7 @@ resource "aws_launch_template" "tokyo_launch_template" {
   #count         = 2
   name_prefix   = "tokyo_asg"
   image_id      = var.ami
-  instance_type = var.instance_type  
+  instance_type = var.instance_type
   #user_data = "${base64encode(<<EOF
 #!/bin/bash
 #sudo su -  
