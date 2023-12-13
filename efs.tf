@@ -24,7 +24,6 @@ resource "aws_efs_file_system" "tokyo_efs" {
 resource "aws_efs_mount_target" "tokyo_EFS_mount_fe" {
   file_system_id  = aws_efs_file_system.tokyo_efs.id
   subnet_id       = module.vpc.vpc_fe_subnet.id
-  #security_groups = [ module.vpc.vpc_fe_sg, module.vpc.vpc_be_sg ] 
   security_groups = [module.vpc.vpc_fe_sg]  
 }
 
@@ -32,7 +31,6 @@ resource "aws_efs_mount_target" "tokyo_EFS_mount_fe" {
 resource "aws_efs_mount_target" "tokyo_EFS_mount_be" {
   file_system_id  = aws_efs_file_system.tokyo_efs.id
   subnet_id       = module.vpc.vpc_be_subnet.id
-  #security_groups = [ module.vpc.vpc_be_sg, module.vpc.vpc_be_sg ] 
   security_groups = [module.vpc.vpc_be_sg]  
 }
 
