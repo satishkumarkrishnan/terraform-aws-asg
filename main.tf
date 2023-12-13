@@ -34,10 +34,11 @@ resource "aws_launch_template" "tokyo_launch_template" {
 #mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,soft,timeo=600,retrans=2 ${aws_efs_file_system.tokyo_efs.dns_name}:/" /tmp/efs
 #  EOF
 #)}"   
-  user_data = "${base64encode(<<-EOT
-    ${templatefile("efs_mount.sh",{efs_hostname = aws_efs_file_system.tokyo_efs.dns_name})}
-  EOT
-  )}"
+  #user_data = "${base64encode(<<-EOT
+  #  ${templatefile("efs_mount.sh",{efs_hostname = aws_efs_file_system.tokyo_efs.dns_name})}
+  #EOT
+  #)}"
+  user_data = filebase64("${path.module}/efs_mount.sh")
   key_name      = "ec2-key"
   vpc_security_group_ids = [module.vpc.vpc_fe_sg]  
   depends_on = [aws_efs_file_system.tokyo_efs] 
