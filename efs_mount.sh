@@ -2,7 +2,7 @@
 sudo su - 
 dnf install -y nfs-utils
 mkdir /tmp/efs
-echo $efs_hostname >> /tmp/efs/efs_name
+echo ${efs_hostname} >> /tmp/efs/efs_name
 export efs_hostname=${efs_hostname}
 systemctl enable --now nfs-server
 # Actually mount the EFS filesystem
