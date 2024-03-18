@@ -9,25 +9,22 @@
      sudo curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/
      sudo curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg |sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes.gpg
      sudo swapoff -a
-     cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
-     overlay
-     br_netfilter
-     EOF
+     sudo apt-get install -y containerd - install containerd
+     
+     #cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+     # overlay
+     # br_netfilter
+     # EOF
 
-     cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
-     net.bridge.bridge-nf-call-iptables  = 1
-     net.bridge.bridge-nf-call-ip6tables = 1
-     net.ipv4.ip_forward                 = 1
-     EOF
+     #cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+     #net.bridge.bridge-nf-call-iptables  = 1
+     #net.bridge.bridge-nf-call-ip6tables = 1
+     #net.ipv4.ip_forward                 = 1
+     #EOF
 
      sudo curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo  gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
      echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
-     sudo apt-get update
-     VERSION=1.29.3-1.1
-     sudo apt-get install -y kubelet=$VERSION kubeadm=$VERSION kubectl=$VERSION
-     sudo apt-mark hold kubelet kubeadm kubectl containerd
-     sudo systemctl status kubelet.service
-     sudo systemctl status containerd.service
+     
 
      sleep 10s
      sudo sysctl --system - apply sysctl without reboot
