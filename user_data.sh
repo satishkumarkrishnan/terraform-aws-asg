@@ -1,9 +1,9 @@
 #!/bin/bash
-     #sudo su
-     sudo apt-get  update -y
-     sudo apt-get install httpd -y
-     sudo systemctl start httpd
-     sudo systemctl enable httpd
+     #sudo su     
+     sudo apt update
+     sudo apt install apache2
+     sudo systemctl status apache2
+     sudo systemctl enable apache2
      sudo echo "<h1>Terraform Learning from $(hostname -f)..</h1>" > /var/www/html/index.html      
      #sudo curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/
      #sudo curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg |sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes.gpg
