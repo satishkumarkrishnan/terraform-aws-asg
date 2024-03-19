@@ -5,12 +5,12 @@
      #systemctl start httpd
      #systemctl enable httpd
      #echo "<h1>Terraform Learning from $(hostname -f)..</h1>" > /var/www/html/index.html 
+     
+     sudo curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/
+     sudo curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg |sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes.gpg
+     sudo swapoff -a
      sudo su   
-     apt-get install -y containerd - install containerd
-     #sudo curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/
-     #sudo curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg |sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes.gpg
-     #sudo swapoff -a
-     #sudo apt-get install -y containerd - install containerd
+     apt-get install -y containerd 
      
      #cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
      # overlay
