@@ -14,7 +14,7 @@ resource "aws_key_pair" "deployer" {
 }
 
 resource "aws_launch_template" "tokyo_launch_template" {
-  count         = 2
+  #count         = 2
   name_prefix   = "tokyo_asg"
   image_id      = var.ami
   instance_type = var.instance_type
