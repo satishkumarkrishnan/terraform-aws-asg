@@ -18,7 +18,22 @@ resource "aws_launch_template" "tokyo_launch_template" {
   name_prefix   = "tokyo_asg"
   image_id      = var.ami
   instance_type = var.instance_type
-  user_data     = filebase64("${path.module}/user_data.sh")
+  user_data = "${base64encode(<<EOF
+#!/bin/bash   
+sudo su -
+apt update
+apt list --upgradable
+apt install apache2
+ufw allow 'Apache'
+systemctl status apache2
+mkdir /var/www/alb
+chown -R $USER:$USER /var/www/alb
+chmod -R 755 /var/www/alb
+echo "<h1>Terraform Learning from $(hostname -f)..</h1>" > /var/www/alb/index.html
+  EOF
+)}"  
+
+#user_data     = filebase64("${path.module}/user_data.sh")
   #user_data = "${base64encode(<<-EOT
   #  ${templatefile("efs_mount.sh",{efs_hostname = aws_efs_file_system.tokyo_efs.dns_name})}
   #EOT
