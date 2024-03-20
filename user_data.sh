@@ -1,13 +1,13 @@
 #!/bin/bash   
- apt update
-sudo apt list --upgradable
-sudo apt install apache2    
-sudo ufw allow 'Apache'
-sudo systemctl status apache2
-sudo mkdir /var/www/alb
-sudo chown -R $USER:$USER /var/www/alb
-sudo chmod -R 755 /var/www/alb
-sudo echo "<h1>Terraform Learning from $(hostname -f)..</h1>" > /var/www/alb/index.html      
+apt update
+apt list --upgradable
+apt install apache2    
+ufw allow 'Apache'
+systemctl status apache2
+mkdir /var/www/alb
+chown -R $USER:$USER /var/www/alb
+chmod -R 755 /var/www/alb
+echo "<h1>Terraform Learning from $(hostname -f)..</h1>" > /var/www/alb/index.html      
      #sudo curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/
      #sudo curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg |sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes.gpg
      #sudo swapoff -a
