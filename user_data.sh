@@ -1,5 +1,5 @@
 #!/bin/bash   
-sudo apt update
+ apt update
 sudo apt list --upgradable
 sudo apt install apache2    
 sudo ufw allow 'Apache'
