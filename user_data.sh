@@ -1,5 +1,4 @@
-#!/bin/bash
-sudo su     
+#!/bin/bash   
 sudo apt update     
 sudo ufw allow 'Apache'
 sudo apt list --upgradable
