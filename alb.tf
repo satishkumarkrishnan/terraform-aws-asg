@@ -7,6 +7,7 @@ resource "aws_lb" "test" {
   security_groups = [module.vpc.vpc_fe_sg, module.vpc.vpc_be_sg]
   subnets      = [module.vpc.vpc_fe_subnet.id, module.vpc.vpc_be_subnet.id]
   enable_deletion_protection = true
+  depends_on = [module.vpc]
 }
 # Target Group Creation
 resource "aws_lb_target_group" "target-group" {
@@ -15,6 +16,7 @@ resource "aws_lb_target_group" "target-group" {
   protocol    = "HTTP"
   target_type = "instance"  
   vpc_id      = module.vpc.vpc_id
+  depends_on = [module.vpc]
 
   health_check {
     enabled             = true
