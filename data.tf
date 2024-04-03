@@ -8,7 +8,7 @@ data "aws_availability_zones" "available" {
 }
 
 # EFS Policy JSON
-/*data "aws_iam_policy_document" "policy" {
+data "aws_iam_policy_document" "policy" {
   statement {
     sid    = "Allow ssl to mount"
     effect = "Allow"
@@ -32,7 +32,8 @@ data "aws_availability_zones" "available" {
       values   = ["true"]
     }
   }
-}*/
+}
+
 data "template_file" "test" {
   template = "${file("${path.module}/efs_mount.sh")}" 
   vars = {  
