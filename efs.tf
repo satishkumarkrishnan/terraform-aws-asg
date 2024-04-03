@@ -3,7 +3,8 @@ module "vpc" {
 }
 
 module "kms" {
-  source="git@github.com:satishkumarkrishnan/Terraform-KMS.git?ref=main"  
+  source="git@github.com:satishkumarkrishnan/Terraform-KMS.git?ref=main" 
+  depends_on = [module.vpc] 
 }
 
 #Adding lifecycle Policy
