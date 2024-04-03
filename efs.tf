@@ -3,15 +3,15 @@ module "vpc" {
 }
 
 module "kms" {
-  source="git@github.com:satishkumarkrishnan/Terraform-KMS.git?ref=main" 
-  depends_on = [module.vpc] 
+  source="git@github.com:satishkumarkrishnan/Terraform-KMS.git?ref=main"   
 }
 
 #Adding lifecycle Policy
 resource "aws_efs_file_system" "tokyo_efs" {
- creation_token = "tokyo_token"
+ creation_token  = "tokyo_token"
   encrypted      = true
-  kms_key_id     = module.kms.kms_arn  
+  kms_key_id     = module.kms.kms_arn 
+  depends_on     = [module.vpc]  
 
   lifecycle_policy {
     transition_to_ia = "AFTER_7_DAYS"    
