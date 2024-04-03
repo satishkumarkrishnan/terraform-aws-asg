@@ -58,3 +58,13 @@ resource "aws_autoscaling_group" "tokyo_asg" {
   autoscaling_group_name = aws_autoscaling_group.tokyo_asg.name  
   depends_on = [aws_efs_file_system.tokyo_efs] 
 }
+
+
+
+data "aws_eks_cluster" "cluster" {
+  name = module.eks.cluster_id
+}
+
+data "aws_eks_cluster_auth" "cluster" {
+  name = module.eks.cluster_id
+}
