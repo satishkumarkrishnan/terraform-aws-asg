@@ -11,7 +11,7 @@ resource "aws_lb" "test" {
 }
 # Target Group Creation
 resource "aws_lb_target_group" "target-group" {
-  name        = "tokyo-tg"
+  name        = "tokyo-lb_tg"
   port        = 80
   protocol    = "HTTP"
   target_type = "instance"  
