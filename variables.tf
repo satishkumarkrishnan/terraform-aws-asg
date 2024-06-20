@@ -12,7 +12,7 @@ variable "cluster_name" {
 variable "ami" {
   description = "The AMI to run in the cluster"
   type        = string
-  default     = "ami-08b718e14edad7164"
+  default     = "ami-01bef798938b7644d"
 }
 
 variable "instance_type" {
