@@ -1,6 +1,8 @@
 data "aws_ami" "ami" {
   owners = ["amazon"]
-  name_regex = "al2023-ami-2023.3.20240219.0-kernel-6.1-x86_64"
+  #name_regex = "al2023-ami-2023.3.20240219.0-kernel-6.1-x86_64"
+
+  name_regex = "al2023-ami-2023.4.20240513.0-kernel-6.1-x86_64"
 }
 
 data "aws_availability_zones" "available" {
