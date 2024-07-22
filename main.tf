@@ -8,6 +8,16 @@ terraform {
     }
   }
 }
+
+#TF code for importing IAM Role
+module "iam" {
+  source ="git@github.com:satishkumarkrishnan/Terraform_IAM.git?ref=main"  
+}
+
+module "cw" {
+  source ="git@github.com:satishkumarkrishnan/Terraform-CloudWatch.git?ref=main"  
+}
+
 resource "aws_key_pair" "deployer" {
   key_name   = "ec2-key"
   public_key = file("${path.module}/key")
