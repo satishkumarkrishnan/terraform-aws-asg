@@ -5,4 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: my-step
-        run: echo "Welcome to my Hello World!"
+        run: echo "My First AWS resources using GHE Actions"
+      - name: Terraform init
+        run: terraform init 
+      - name: Terraform Plan
+        run: terraform plan
+      - name: Terraform Apply
+        run: terraform apply    
