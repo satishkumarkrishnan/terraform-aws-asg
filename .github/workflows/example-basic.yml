@@ -12,6 +12,7 @@ jobs:
         run: echo "My First AWS resources using GHE Actions"
       - name: Terraform init
         run: terraform init 
+        working-directory: main
       - name: Terraform Plan
         run: terraform plan
       - name: Terraform Apply
